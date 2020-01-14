@@ -1,0 +1,37 @@
+{
+  "name": "sourcebit-sourcebit-sample-plugin",
+  "version": "0.1.0",
+  "description": "A sample Sourcebit plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run format",
+    "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackbithq/sourcebit-sourcebit-sample-plugin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stackbithq/sourcebit-sourcebit-sample-plugin/issues"
+  },
+  "homepage": "https://github.com/stackbithq/sourcebit-sourcebit-sample-plugin#readme",
+  "devDependencies": {
+    "husky": "^4.0.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md,html}": [
+      "npm run format",
+      "git add"
+    ]
+  }
+}
