@@ -73,9 +73,10 @@ module.exports.options = {
  *                                                           *
  *  - `getPluginContext` (Function): A function for getting  *
  *    the plugin's context object.                           *
- *  - `log` (Function): An alias for `console.log` that adds *
- *    to the message information about the plugin it comes   *
- *    from.                                                  *
+ *  - `log` (Function): A method for logging a message. It   *
+ *    adds a prefix with the name of the plugin that created *
+ *    it, and respects the verbosity settings specified by   *
+ *    the user.                                              *
  *  - `options` (Object): The plugin options object, as they *
  *    come from the main configuration file, `.env` files    *
  *    and runtime parameters.                                *
@@ -235,6 +236,9 @@ module.exports.transform = ({ data, getPluginContext }) => {
  *  - `data` (Object): The data object populated by all      *
  *    previous plugins.                                      *
  *    data buckets.                                          *
+ *  - `getSetupContext` (Function): A function for getting   *
+ *    the context object that is shared between all the      *
+ *    plugins during the setup process.                      *
  *  - `inquirer` (Function): An instance of the `inquirer`   *
  *    npm module (https://www.npmjs.com/package/inquirer),   *
  *    used in the command-line interface to prompt questions *
@@ -243,9 +247,20 @@ module.exports.transform = ({ data, getPluginContext }) => {
  *    (https://www.npmjs.com/package/ora), used in the       *
  *    command-line interface to display information and      *
  *    error messages, as well as loading states.             *
+ *  - `setSetupContext` (Function): A function for setting   *
+ *    the context object that is shared between all the      *
+ *    plugins during the setup process.                      *
  *                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-module.exports.getSetup = ({ chalk, context, data, inquirer, ora }) => {
+module.exports.getSetup = ({
+  chalk,
+  context,
+  data,
+  getSetupContext,
+  inquirer,
+  ora,
+  setSetupContext
+}) => {
   const questions = [
     {
       type: "number",
@@ -268,7 +283,7 @@ module.exports.getSetup = ({ chalk, context, data, inquirer, ora }) => {
   return async () => {
     const spinner = ora("Crunching some numbers...").start();
 
-    // 💭 await runSomeAsyncTask();
+    // ⏳ await runSomeAsyncTask();
 
     spinner.succeed();
 
@@ -284,20 +299,36 @@ module.exports.getSetup = ({ chalk, context, data, inquirer, ora }) => {
  *     ===================                                   *
  *                                                           *
  *  A function to be executed after the interactive has      *
- *  finished. It receives an object with the answers that    *
- *  were generated in the setup process and returns the      *
- *  object that is to be set as the `options` block of the   *
- *  plugin configuration in `sourcebit.js`.                  *
+ *  finished.                                                *
+ *  It receives an object with the following properties:     *
+ *                                                           *
+ *  - `answers` (Object): The answers generated during the   *
+ *    interactive setup process.                             *
+ *    data buckets.                                          *
+ *  - `getSetupContext` (Function): A function for getting   *
+ *    the context object that is shared between all the      *
+ *    plugins during the setup process.                      *
+ *  - `setSetupContext` (Function): A function for setting   *
+ *    the context object that is shared between all the      *
+ *    plugins during the setup process.                      *
+ *                                                           *
+ *  The return value of this function must be the object     *
+ *  that is to be set as the `options` block of the plugin   *
+ *  configuration in `sourcebit.js`.                         *
  *                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-module.exports.getOptionsFromSetup = ({ pointsForJane, pointsForJohn }) => {
+module.exports.getOptionsFromSetup = ({
+  answers,
+  getSetupContext,
+  setSetupContext
+}) => {
   // 👉 This is a good place to make some transformation to the
   // values generated in the setup process before they're added
   // to the configuration file. In this case, we're just making
   // up a use case where we want to ensure that John's points
   // do not exceed 15.
   return {
-    pointsForJane,
-    pointsForJohn: Math.min(pointsForJohn, 15)
+    pointsForJane: answers.pointsForJane,
+    pointsForJohn: Math.min(answers.pointsForJohn, 15)
   };
 };
