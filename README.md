@@ -4,11 +4,11 @@
 
 > A sample plugin for [Sourcebit](https://github.com/stackbithq/sourcebit)
 
-## Introduction
+## 👩‍🏫 Introduction
 
 This is a simple Sourcebit plugin for development and educational purposes. It operates on a model with three fields (`firstName`, `lastName` and `points`) and creates two entries with a pre-defined value for points. If the `watch` option is supplied, then every 3 seconds one of the entries will be randomly picked and its points will be incremented by one.
 
-## Configuration
+## ⚙️ Configuration
 
 The plugin accepts the following configuration parameters. They can be supplied in any of the following ways:
 
@@ -19,10 +19,10 @@ The plugin accepts the following configuration parameters. They can be supplied 
 
 | Property        | Type    | Visibility  | Default value | Env variable | Parameter | Description                                                                         |
 | --------------- | ------- | ----------- | ------------- | ------------ | --------- | ----------------------------------------------------------------------------------- |
-| `mySecret`      | String  | **Private** | –             | `MY_SECRET`  | –         | A secret value. Not actually used by the plugin, purely for demonstration purposes. |
-| `watch`         | Boolean | Public      | `false`       | –            | `watch`   | Whether to update entries on a regular interval.                                    |
-| `pointsForJane` | Number  | Public      | `0`           | –            | –         | The initial number of points assigned to Jane                                       |
-| `pointsForJohn` | Number  | Public      | `0`           | –            | –         | The initial number of points assigned to John                                       |
+| `mySecret`      | String  | **Private** | –             | `MY_SECRET`  |           | A secret value. Not actually used by the plugin, purely for demonstration purposes. |
+| `watch`         | Boolean | Public      | `false`       |              | `watch`   | Whether to update entries on a regular interval.                                    |
+| `pointsForJane` | Number  | Public      | `0`           |              |           | The initial number of points assigned to Jane                                       |
+| `pointsForJohn` | Number  | Public      | `0`           |              |           | The initial number of points assigned to John                                       |
 
 ### Example configuration
 
@@ -42,10 +42,10 @@ module.exports = {
 };
 ```
 
-## Input
+## 📥 Input
 
-N/A
+_N/A_
 
-## Output
+## 📤 Output
 
 This plugin adds normalized entries to the `objects` data bucket and normalized model objects to the `models` data bucket.
