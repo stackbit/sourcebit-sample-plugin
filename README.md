@@ -24,7 +24,7 @@ The plugin accepts the following configuration parameters. They can be supplied 
 | `pointsForJane` | Number  | Public      | `0`           |              |           | The initial number of points assigned to Jane                                       |
 | `pointsForJohn` | Number  | Public      | `0`           |              |           | The initial number of points assigned to John                                       |
 
-### Example configuration
+### 👀 Example configuration
 
 _sourcebit.js_
 
