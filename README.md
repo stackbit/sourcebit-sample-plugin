@@ -19,7 +19,7 @@ The plugin accepts the following configuration parameters. They can be supplied 
 
 | Property        | Type    | Visibility  | Default value | Env variable | Parameter | Description                                                                         |
 | --------------- | ------- | ----------- | ------------- | ------------ | --------- | ----------------------------------------------------------------------------------- |
-| `mySecret`      | String  | **Private** | –             | `MY_SECRET`  |           | A secret value. Not actually used by the plugin, purely for demonstration purposes. |
+| `mySecret`      | String  | **Private** |               | `MY_SECRET`  |           | A secret value. Not actually used by the plugin, purely for demonstration purposes. |
 | `watch`         | Boolean | Public      | `false`       |              | `watch`   | Whether to update entries on a regular interval.                                    |
 | `pointsForJane` | Number  | Public      | `0`           |              |           | The initial number of points assigned to Jane                                       |
 | `pointsForJohn` | Number  | Public      | `0`           |              |           | The initial number of points assigned to John                                       |
