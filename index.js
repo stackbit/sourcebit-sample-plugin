@@ -56,10 +56,10 @@ module.exports.options = {
     runtimeParameter: "watch"
   },
   pointsForJane: {
-    default: 5
+    default: 0
   },
   pointsForJohn: {
-    default: 3
+    default: 0
   }
 };
 
@@ -196,18 +196,24 @@ module.exports.transform = ({ data, getPluginContext }) => {
   // entries that we've created in the bootstrap method.
   const { entries } = getPluginContext();
 
+  // Source plugins are encouraged to add information about their
+  // models to the `models` data bucket.
+  const model = {
+    source: pkg.name,
+    modelName: "sample-data",
+    modelLabel: "Mock data",
+    projectId: "12345",
+    projectEnvironment: "master",
+    fieldNames: ["firstName", "lastName", "points"]
+  };
+
   // 👉 The main purpose of this method is to normalize the
   // entries, so that they conform to a standardized format
   // used by all source plugins.
   const normalizedEntries = entries.map(entry => ({
     ...entry.fields,
     id: entry._id,
-    __metadata: {
-      source: pkg.name,
-      modelName: "my-model",
-      projectId: "my-project",
-      projectEnvironment: "production"
-    }
+    __metadata: model
   }));
 
   // 👉 The method must return the updated data object, which
@@ -215,6 +221,7 @@ module.exports.transform = ({ data, getPluginContext }) => {
   // property.
   return {
     ...data,
+    models: data.models.concat(model),
     objects: data.objects.concat(normalizedEntries)
   };
 };
