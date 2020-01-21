@@ -44,7 +44,7 @@ module.exports = {
 
 ### 🧞‍♂️ Interactive setup process
 
-This plugins offers an interactive setup process via the `npx create-sourcebit` command.
+This plugin offers an interactive setup process via the `npx create-sourcebit` command.
 
 ## 📥 Input
 
