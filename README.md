@@ -21,8 +21,8 @@ The plugin accepts the following configuration parameters. They can be supplied 
 | --------------- | ------- | ----------- | ------------- | ------------ | --------- | ----------------------------------------------------------------------------------- |
 | `mySecret`      | String  | **Private** |               | `MY_SECRET`  |           | A secret value. Not actually used by the plugin, purely for demonstration purposes. |
 | `watch`         | Boolean | Public      | `false`       |              | `watch`   | Whether to update entries on a regular interval.                                    |
-| `pointsForJane` | Number  | Public      | 0             |              |           | The initial number of points assigned to Jane                                       |
-| `pointsForJohn` | Number  | Public      | 0             |              |           | The initial number of points assigned to John                                       |
+| `pointsForJane` | Number  | Public      | `0`           |              |           | The initial number of points assigned to Jane                                       |
+| `pointsForJohn` | Number  | Public      | `0`           |              |           | The initial number of points assigned to John                                       |
 
 ### Example configuration
 
@@ -42,7 +42,7 @@ module.exports = {
 };
 ```
 
-## Expected input
+## Input
 
 N/A
 
