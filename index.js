@@ -71,6 +71,10 @@ module.exports.options = {
  *  A function to be executed once when the plugin starts.   *
  *  It receives an object with the following properties:     *
  *                                                           *
+ *  - `debug` (Function): A method for printing data that    *
+ *    might be useful to see when debugging the plugin.      *
+ *    Data sent to this method will be hidden from the user  *
+ *    unless the application is in debug mode.               *
  *  - `getPluginContext` (Function): A function for getting  *
  *    the plugin's context object.                           *
  *  - `log` (Function): A method for logging a message. It   *
@@ -88,6 +92,7 @@ module.exports.options = {
  *                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 module.exports.bootstrap = async ({
+  debug,
   getPluginContext,
   log,
   options,
@@ -127,6 +132,7 @@ module.exports.bootstrap = async ({
     ];
 
     log(`Generated ${entries.length} entries`);
+    debug("Initial entries: %O", entries);
 
     // 👉 Adding the newly-generated entries to the plugin's
     // context object.
@@ -152,6 +158,7 @@ module.exports.bootstrap = async ({
       log(
         `Updated entry #${entryIndex}: ${currentPoints} points -> ${entries[entryIndex].fields.points} points`
       );
+      debug("Updated entries: %O", entries);
 
       // 👉 We take the new entries array and update the plugin context.
       setPluginContext({ entries });
@@ -181,6 +188,10 @@ module.exports.bootstrap = async ({
  *                                                           *
  *  - `data` (Object): The input data object, containing     *
  *    data buckets.                                          *
+ *  - `debug` (Function): A method for printing data that    *
+ *    might be useful to see when debugging the plugin.      *
+ *    Data sent to this method will be hidden from the user  *
+ *    unless the application is in debug mode.               *
  *  - `getPluginContext` (Function): A function for getting  *
  *    the plugin's context object.                           *
  *  - `log` (Function): An alias for `console.log` that adds *
@@ -191,7 +202,13 @@ module.exports.bootstrap = async ({
  *    and runtime parameters.                                *
  *                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-module.exports.transform = ({ data, getPluginContext }) => {
+module.exports.transform = ({
+  data,
+  debug,
+  getPluginContext,
+  login,
+  options
+}) => {
   // 👉 Let's retrieve from the plugin's context object the
   // entries that we've created in the bootstrap method.
   const { entries } = getPluginContext();
@@ -243,6 +260,10 @@ module.exports.transform = ({ data, getPluginContext }) => {
  *  - `data` (Object): The data object populated by all      *
  *    previous plugins.                                      *
  *    data buckets.                                          *
+ *  - `debug` (Function): A method for printing data that    *
+ *    might be useful to see when debugging the plugin.      *
+ *    Data sent to this method will be hidden from the user  *
+ *    unless the application is in debug mode.               *
  *  - `getSetupContext` (Function): A function for getting   *
  *    the context object that is shared between all the      *
  *    plugins during the setup process.                      *
@@ -263,6 +284,7 @@ module.exports.getSetup = ({
   chalk,
   context,
   data,
+  debug,
   getSetupContext,
   inquirer,
   ora,
@@ -312,6 +334,10 @@ module.exports.getSetup = ({
  *  - `answers` (Object): The answers generated during the   *
  *    interactive setup process.                             *
  *    data buckets.                                          *
+ *  - `debug` (Function): A method for printing data that    *
+ *    might be useful to see when debugging the plugin.      *
+ *    Data sent to this method will be hidden from the user  *
+ *    unless the application is in debug mode.               *
  *  - `getSetupContext` (Function): A function for getting   *
  *    the context object that is shared between all the      *
  *    plugins during the setup process.                      *
@@ -326,6 +352,7 @@ module.exports.getSetup = ({
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 module.exports.getOptionsFromSetup = ({
   answers,
+  debug,
   getSetupContext,
   setSetupContext
 }) => {
