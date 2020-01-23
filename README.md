@@ -8,6 +8,16 @@
 
 This is a simple Sourcebit plugin for development and educational purposes. It operates on a model with three fields (`firstName`, `lastName` and `points`) and creates two entries with a pre-defined value for points. If the `watch` option is supplied, then every 3 seconds one of the entries will be randomly picked and its points will be incremented by one.
 
+## 🏗 Installation
+
+To install the plugin and add it to your project, run:
+
+```
+npm install sourcebit-target-jekyll --save
+```
+
+> 💡 You don't need to run this command if you start Sourcebit using the [interactive setup process](#%EF%B8%8F-interactive-setup-process), as the CLI will install the plugin for you and add it as a dependency to your project.
+
 ## ⚙️ Configuration
 
 The plugin accepts the following configuration parameters. They can be supplied in any of the following ways:
