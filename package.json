@@ -1,6 +1,6 @@
 {
-  "name": "sourcebit-sourcebit-sample-plugin",
-  "version": "0.1.1",
+  "name": "sourcebit-sample-plugin",
+  "version": "0.1.0",
   "description": "A sample Sourcebit plugin",
   "main": "index.js",
   "scripts": {
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stackbithq/sourcebit-sourcebit-sample-plugin.git"
+    "url": "git+https://github.com/stackbithq/sourcebit-sample-plugin.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stackbithq/sourcebit-sourcebit-sample-plugin/issues"
+    "url": "https://github.com/stackbithq/sourcebit-sample-plugin/issues"
   },
-  "homepage": "https://github.com/stackbithq/sourcebit-sourcebit-sample-plugin#readme",
+  "homepage": "https://github.com/stackbithq/sourcebit-sample-plugin#readme",
   "devDependencies": {
     "husky": "^4.0.0",
     "lint-staged": "^9.5.0",
