@@ -8,6 +8,8 @@
 
 This is a simple Sourcebit plugin for development and educational purposes. It operates on a model with three fields (`firstName`, `lastName` and `points`) and creates two entries with a pre-defined value for points. If the `watch` option is supplied, then every 3 seconds one of the entries will be randomly picked and its points will be incremented by one.
 
+For details on how Sourcebit plugins work and the requirements for creating a new plugin, please check out [contribution guidelines](https://github.com/stackbithq/sourcebit/blob/master/CONTRIBUTING.md#creating-a-plugin).
+
 ## 🏗 Installation
 
 To install the plugin and add it to your project, run:
