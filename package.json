@@ -1,6 +1,6 @@
 {
   "name": "sourcebit-sample-plugin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A sample Sourcebit plugin",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/stackbithq/sourcebit-sample-plugin.git"
   },
-  "keywords": ["headless", "headless-cms", "jamstack", "ssg"],
+  "keywords": [
+    "headless",
+    "headless-cms",
+    "jamstack",
+    "ssg"
+  ],
   "author": "Stackbit",
   "license": "MIT",
   "bugs": {
