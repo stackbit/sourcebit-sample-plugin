@@ -257,6 +257,8 @@ module.exports.transform = ({
  *    the command-line interface for styling text.           *
  *  - `context` (Object): The global context object, shared  *
  *    by all plugins.                                        *
+ *  - `currentOptions` (Object): The options for this plugin *
+ *    present in an existing configuration file, if found.   *
  *  - `data` (Object): The data object populated by all      *
  *    previous plugins.                                      *
  *    data buckets.                                          *
@@ -283,6 +285,7 @@ module.exports.transform = ({
 module.exports.getSetup = ({
   chalk,
   context,
+  currentOptions,
   data,
   debug,
   getSetupContext,
@@ -294,12 +297,14 @@ module.exports.getSetup = ({
     {
       type: "number",
       name: "pointsForJane",
-      message: "How many points should Jane start with?"
+      message: "How many points should Jane start with?",
+      default: currentOptions.pointsForJane
     },
     {
       type: "number",
       name: "pointsForJohn",
-      message: "How many points should John start with?"
+      message: "How many points should John start with?",
+      default: currentOptions.pointsForJohn
     }
   ];
 
