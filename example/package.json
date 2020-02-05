@@ -1,0 +1,11 @@
+{
+  "name": "example-project",
+  "main": "index.js",
+  "scripts": {
+    "sourcebit-cli": "sourcebit fetch --no-cache",
+    "sourcebit-node": "node index.js"
+  },
+  "dependencies": {
+    "sourcebit": "^0.4.0"
+  }
+}

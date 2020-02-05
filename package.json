@@ -1,6 +1,6 @@
 {
   "name": "sourcebit-sample-plugin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A sample Sourcebit plugin",
   "main": "index.js",
   "scripts": {
@@ -38,5 +38,8 @@
       "npm run format",
       "git add"
     ]
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }

@@ -1,3 +1,4 @@
+const axios = require("axios");
 const pkg = require("./package.json");
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -55,11 +56,8 @@ module.exports.options = {
     // other value defined in the configuration file.
     runtimeParameter: "watch"
   },
-  pointsForJane: {
-    default: 0
-  },
-  pointsForJohn: {
-    default: 0
+  titleCase: {
+    default: false
   }
 };
 
@@ -112,26 +110,11 @@ module.exports.bootstrap = async ({
   if (context && context.entries) {
     log(`Loaded ${context.entries.length} entries from cache`);
   } else {
-    const entries = [
-      {
-        _id: "123456",
-        fields: {
-          firstName: "John",
-          lastName: "Doe",
-          points: options.pointsForJohn
-        }
-      },
-      {
-        _id: "654321",
-        fields: {
-          firstName: "Jane",
-          lastName: "Doe",
-          points: options.pointsForJane
-        }
-      }
-    ];
+    const { data: entries } = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
 
-    log(`Generated ${entries.length} entries`);
+    log(`Loaded ${entries.length} entries`);
     debug("Initial entries: %O", entries);
 
     // 👉 Adding the newly-generated entries to the plugin's
@@ -145,19 +128,14 @@ module.exports.bootstrap = async ({
   // that checks for changes in the data source. In a real-world plugin,
   // you'd be doing things like making regular calls to an API to check
   // whenever something changes.
-  // In this example, we just pick a random entry every 3 seconds and
-  // increment its `points` field. (Let's see who wins: Jane or John 👀)
   if (options.watch) {
     setInterval(() => {
       const { entries } = getPluginContext();
       const entryIndex = Math.floor(Math.random() * entries.length);
-      const currentPoints = entries[entryIndex].fields.points;
 
-      entries[entryIndex].fields.points = currentPoints + 1;
+      entries[entryIndex].body = entries[entryIndex].body + " (updated)";
 
-      log(
-        `Updated entry #${entryIndex}: ${currentPoints} points -> ${entries[entryIndex].fields.points} points`
-      );
+      log(`Updated entry #${entryIndex}`);
       debug("Updated entries: %O", entries);
 
       // 👉 We take the new entries array and update the plugin context.
@@ -206,7 +184,7 @@ module.exports.transform = ({
   data,
   debug,
   getPluginContext,
-  login,
+  log,
   options
 }) => {
   // 👉 Let's retrieve from the plugin's context object the
@@ -227,11 +205,20 @@ module.exports.transform = ({
   // 👉 The main purpose of this method is to normalize the
   // entries, so that they conform to a standardized format
   // used by all source plugins.
-  const normalizedEntries = entries.map(entry => ({
-    ...entry.fields,
-    id: entry._id,
-    __metadata: model
-  }));
+  const normalizedEntries = entries.map(entry => {
+    const title = options.titleCase
+      ? entry.title
+          .split(" ")
+          .map(word => word[0].toUpperCase() + word.substring(1))
+          .join(" ")
+      : entry.title;
+
+    return {
+      ...entry,
+      title,
+      __metadata: model
+    };
+  });
 
   // 👉 The method must return the updated data object, which
   // in our case means appending our entries to the `objects`
@@ -295,16 +282,10 @@ module.exports.getSetup = ({
 }) => {
   const questions = [
     {
-      type: "number",
-      name: "pointsForJane",
-      message: "How many points should Jane start with?",
-      default: currentOptions.pointsForJane
-    },
-    {
-      type: "number",
-      name: "pointsForJohn",
-      message: "How many points should John start with?",
-      default: currentOptions.pointsForJohn
+      type: "confirm",
+      name: "titleCase",
+      message: "Do you want to convert the title field to title-case?",
+      default: currentOptions.pointsForJane || false
     }
   ];
 
@@ -363,11 +344,8 @@ module.exports.getOptionsFromSetup = ({
 }) => {
   // 👉 This is a good place to make some transformation to the
   // values generated in the setup process before they're added
-  // to the configuration file. In this case, we're just making
-  // up a use case where we want to ensure that John's points
-  // do not exceed 15.
+  // to the configuration file.
   return {
-    pointsForJane: answers.pointsForJane,
-    pointsForJohn: Math.min(answers.pointsForJohn, 15)
+    titleCase: answers.titleCase
   };
 };
