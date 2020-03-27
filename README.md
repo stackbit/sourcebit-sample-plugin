@@ -10,6 +10,8 @@ This is a simple Sourcebit plugin for development and educational purposes. It r
 
 For details on how Sourcebit plugins work and the requirements for creating a new plugin, please check out [contribution guidelines](https://github.com/stackbithq/sourcebit/blob/master/CONTRIBUTING.md#creating-a-plugin).
 
+**For a step-by-step walkthrough on building a Sourcebit plugin, check out our tutorial at: <https://www.stackbit.com/blog/sourcebit-plugin/>**
+
 ## 🏗 Installation
 
 To install the plugin and add it to your project, run:
