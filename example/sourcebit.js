@@ -1,10 +1,10 @@
 module.exports = {
-  plugins: [
-    {
-      module: require("../index"),
-      options: {
-        titleCase: true
-      }
-    }
-  ]
+    plugins: [
+        {
+            module: require('../index'),
+            options: {
+                titleCase: true
+            }
+        }
+    ]
 };

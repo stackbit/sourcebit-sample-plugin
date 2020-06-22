@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/stackbithq/sourcebit-sample-plugin#readme",
   "devDependencies": {
+    "@stackbit/prettier-config": "^1.0.0",
     "husky": "^4.0.0",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1"
@@ -41,5 +42,6 @@
   },
   "dependencies": {
     "axios": "^0.19.2"
-  }
+  },
+  "prettier": "@stackbit/prettier-config"
 }
