@@ -26,10 +26,10 @@ npm install sourcebit-sample-plugin --save
 
 The plugin accepts the following configuration parameters. They can be supplied in any of the following ways:
 
-- In the `options` object of the plugin configuration block inside `sourcebit.js`, with the value of the _Property_ column as a key;
-- As an environment variable named after the _Env variable_ column, when running the `sourcebit fetch` command;
-- As part of a `.env` file, with the value of the _Env variable_ column separated by the value with an equals sign (e.g. `MY_VARIABLE=my-value`);
-- As a CLI parameter, when running the `sourcebit fetch` command, using the value of the _Parameter_ column as the name of the parameter (e.g. `sourcebit fetch --my-parameter`).
+-   In the `options` object of the plugin configuration block inside `sourcebit.js`, with the value of the _Property_ column as a key;
+-   As an environment variable named after the _Env variable_ column, when running the `sourcebit fetch` command;
+-   As part of a `.env` file, with the value of the _Env variable_ column separated by the value with an equals sign (e.g. `MY_VARIABLE=my-value`);
+-   As a CLI parameter, when running the `sourcebit fetch` command, using the value of the _Parameter_ column as the name of the parameter (e.g. `sourcebit fetch --my-parameter`).
 
 | Property    | Type    | Visibility  | Default value | Env variable | Parameter | Description                                                                         |
 | ----------- | ------- | ----------- | ------------- | ------------ | --------- | ----------------------------------------------------------------------------------- |
@@ -43,14 +43,14 @@ _sourcebit.js_
 
 ```js
 module.exports = {
-  plugins: [
-    {
-      module: require("sourcebit-sample-plugin"),
-      options: {
-        titleCase: true
-      }
-    }
-  ]
+    plugins: [
+        {
+            module: require('sourcebit-sample-plugin'),
+            options: {
+                titleCase: true
+            }
+        }
+    ]
 };
 ```
 
