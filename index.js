@@ -184,7 +184,7 @@ module.exports.transform = ({ data, debug, getPluginContext, log, options }) => 
         modelLabel: 'Mock data',
         projectId: '12345',
         projectEnvironment: 'master',
-        fieldNames: ['firstName', 'lastName', 'points']
+        fieldNames: ['userId', 'id', 'title', 'body']
     };
 
     // 👉 The main purpose of this method is to normalize the
