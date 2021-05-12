@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run format",
-    "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
+    "format": "prettier --write \"./**/*.{js,jsx,md,html}\"",
+    "prepack": "npm test",
+    "version-minor": "npm version minor -m \"bumped version to v%s\"",
+    "version-patch": "npm version patch -m \"bumped version to v%s\""
   },
   "repository": {
     "type": "git",
